@@ -20,7 +20,7 @@ class _InputPageState extends State<InputPage> {
   Color maleCardColor = inactiveCardColor;
   Color femaleCardColor = inactiveCardColor;
 // 1- male | 0 - female
-
+  int Height = 180;
 
 
   @override
@@ -78,19 +78,50 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: ReusableCard(
-                    color: reusableColorCard,
-                    cardChild: IconContents(
-                      iconType: FontAwesomeIcons.accusoft,
-                      color: Colors.white,
-                      text: 'Slider',
-                    )
+            child: ReusableCard(
+              color: reusableColorCard,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Height',
+                    style: textStyle,
                   ),
-                ),
-              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        Height.toString(),
+                        style: TextStyle(
+                          fontSize: 50.0,
+                          fontWeight: FontWeight.w900,
+                          color: Color(0XFFFFC107),
+                        ),
+                      ),
+                      Text(
+                        'cm',
+                        style: textStyle,
+                      )
+                    ],
+                  ),
+                  Slider.adaptive(value: Height.toDouble(),
+                      min: 120.0,
+                      max: 220.0,
+                      activeColor: Color(0XFFFE2955),
+                      inactiveColor: Color(0XFF673AB7),
+                      onChanged: (double newValue)
+                    {
+                      setState(() {
+                        Height=newValue.round();
+                      });
+
+                    },
+                  )
+                ],
+              ),
+
             ),
           ),
           Expanded(
