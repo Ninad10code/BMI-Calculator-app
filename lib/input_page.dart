@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'icon_content.dart';
 import 'reusable_card.dart';
+import 'results_page.dart';
+import 'calculated_bmi.dart';
 
 class InputPage extends StatefulWidget {
   @override
@@ -229,11 +231,41 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: bottomButtonColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: bottomContainerHeight,
+          GestureDetector(
+            onTap: (){
+              CalculatedBMI cal = CalculatedBMI(height: Height, weight: Weight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context){
+                    return ResultPage(
+                      BMIresult: cal.calculate(),
+                      BMIInterpretator: cal.getInterpretation(),
+                      BMIText: cal.getResult(),
+                    );
+                  }
+
+                ),
+              );
+            },
+            child: Container(
+              color: bottomButtonColor,
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: bottomContainerHeight,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Calculate',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              )
+            ),
           ),
         ],
       ),
